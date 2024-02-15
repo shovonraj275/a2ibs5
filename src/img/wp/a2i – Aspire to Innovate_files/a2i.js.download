@@ -1,0 +1,589 @@
+// Equality All Video Display\
+if (location.pathname === "/a2i-trending-insights/e-quailty-centre-for-inclusive-innovation/") {
+    const loadAllVideoBtn = document.getElementById('equalityVideo')
+    const equalityVideoWrapper = document.querySelector('.equality#videos')
+    const equalityVideoLoadMoreBtn = document.querySelector('.equality-video-load-more-btn')
+
+    loadAllVideoBtn.addEventListener('click', e => {
+        e.preventDefault()
+
+        equalityVideoWrapper.style.maxHeight = '100%'
+        equalityVideoLoadMoreBtn.style.display = 'none'
+    })
+}
+
+// Resources Post Plate
+window.addEventListener('click', e => {
+    if (e.target.classList.contains('rpb-active')) {
+        this.children[1].style.display = 'none'
+    }
+})
+
+const rpb = document.querySelectorAll('.rp-b')
+
+for (var i = 0, length = rpb.length; i < length; i++) {
+    rpb[i].onclick = function() {
+        var b = document.querySelector("a.rpb-active");
+        if (b) b.classList.remove("rpb-active");
+        this.classList.add('rpb-active');
+    };
+}
+
+// document.querySelector('.rpb-active').addEventListener('click', () => {
+//     document.querySelector('rpb-content').style.display = 'none'
+// })
+
+// Change copy btn icon
+const copyBtnIcon = document.querySelectorAll('.fa-copy')
+const copyBtn = document.querySelectorAll('button.copy')
+
+copyBtnIcon.forEach(ci => {
+    ci.addEventListener('click', (e) => {
+        e.target.classList.remove('fa-regular', 'fa-copy')
+        e.target.classList.add('fa-solid', 'fa-check')
+
+        setTimeout(() => {
+            e.target.classList.remove('fa-solid', 'fa-check')
+            e.target.classList.add('fa-regular', 'fa-copy')
+        }, 1000)
+    })
+})
+
+copyBtn.forEach(cb => {
+    const cbTitleArr = cb.title.split(' ')
+    
+    cb.addEventListener('click', () => {
+        if(cbTitleArr[1] === 'Email') {
+            cb.setAttribute("aria-label", "Email Copied")
+        } else {
+            cb.setAttribute("aria-label", "Phone Number Copied")
+        }
+    })
+})
+
+
+// Accessibility
+const skipLinksWrapper = document.getElementById('skip-links-wrapper')
+const closeAccess = document.getElementById('close-access')
+const openAccessibility = document.getElementById('open-accessibility')
+const skipAccessibility = document.getElementById('skip-contents')
+const goAccessibility = document.getElementById('go-accessibility')
+const accessibilityButtons = document.querySelector('#accessibility .accessibility-buttons')
+const setAccessibility = document.querySelectorAll('.setAccessibility ')
+const logo = document.querySelector('#logo svg')
+
+setAccessibility.forEach(sa => {
+    sa.addEventListener('focus', e => {
+        accessibilityButtons.classList.add('open')
+        openAccessibility.classList.remove('position-absolute')
+        
+        if(accessibilityButtons.classList.contains('open')) {
+            accessibilityButtons.classList.remove('d-none')
+        } else {
+        	accessibilityButtons.classList.add('d-none')
+        }
+    })
+})
+
+const btns = [goAccessibility, skipAccessibility, closeAccess]
+btns.forEach(btn => {
+    btn.addEventListener('focus', e => {
+        skipLinksWrapper.style.top = 0
+    })
+
+    btn.addEventListener('focusout', e => {
+        skipLinksWrapper.style.top = '-1000px'
+    })
+    
+    if(accessibilityButtons.classList.contains('open')) {
+        accessibilityButtons.classList.remove('d-none')
+    } else {
+        accessibilityButtons.classList.add('d-none')
+    }
+})
+
+closeAccess.addEventListener('click', e => {
+    skipLinksWrapper.style.top = '-1000px'
+})
+
+openAccessibility.addEventListener('click', e => {
+    accessibilityButtons.classList.toggle('open')
+    openAccessibility.classList.toggle('position-absolute')
+    
+    if(accessibilityButtons.classList.contains('open')) {
+        accessibilityButtons.classList.remove('d-none')
+    } else {
+        accessibilityButtons.classList.add('d-none')
+    }
+})
+
+goAccessibility.addEventListener('click', e => {
+    accessibilityButtons.classList.toggle('open')
+    openAccessibility.classList.toggle('position-absolute')
+    
+    if(accessibilityButtons.classList.contains('open')) {
+        accessibilityButtons.classList.remove('d-none')
+    } else {
+        accessibilityButtons.classList.add('d-none')
+    }
+})
+
+if(localStorage.getItem('accessibility-class') !== '') {
+    document.body.classList.add(localStorage.getItem('accessibility-class'))
+}
+
+// Set class to reading guide
+function getAccessibilityClass(c) {
+    document.body.classList.toggle(c)
+
+    if(!document.body.classList.contains(c)) {
+        localStorage.setItem('accessibility-class', '')
+    }
+}
+
+// Monochrome
+document.getElementById('monochrome').addEventListener('click', e => {
+    localStorage.setItem('accessibility-class', 'contrast')
+    getAccessibilityClass(localStorage.getItem('accessibility-class'))
+})
+
+// Invert Color
+document.getElementById('invertColor').addEventListener('click', e => {
+    localStorage.setItem('accessibility-class', 'darkmode')
+    getAccessibilityClass(localStorage.getItem('accessibility-class'))
+})
+
+// Big Cursor
+document.getElementById('cursormode').addEventListener('click', e => {
+    localStorage.setItem('accessibility-class', 'cursormode')
+    getAccessibilityClass(localStorage.getItem('accessibility-class'))
+})
+
+// Link Focus
+document.getElementById('linkmode').addEventListener('click', e => {
+    localStorage.setItem('accessibility-class', 'linkmode')
+    getAccessibilityClass(localStorage.getItem('accessibility-class'))
+})
+
+// Heading Highlight
+document.getElementById('headingmode').addEventListener('click', e => {
+    localStorage.setItem('accessibility-class', 'headingmode')
+    getAccessibilityClass(localStorage.getItem('accessibility-class'))
+})
+
+// Reading Guide Line Move
+document.getElementById('readingguide').addEventListener('click', e => {
+    document.getElementById('reading-guide').classList.toggle('d-none')
+})
+// Move LINE on Mouse Position
+window.addEventListener('mousemove', e => {
+    var y = e.pageY;
+    document.getElementById('reading-guide').style.transform = "translateY(" + y + "px)"
+}, false)
+
+// Reset Accessibility
+document.getElementById('resetClass').addEventListener('click', e => {
+    document.getElementById('reading-guide').classList.add('d-none')
+    document.body.classList.remove(localStorage.getItem('accessibility-class'))
+    localStorage.setItem('accessibility-class', '')
+    getAccessibilityClass(localStorage.getItem('accessibility-class'))
+})
+
+// Change Inner Text
+const publications_file_link_t = document.querySelectorAll('#publications_file_link_t')
+
+publications_file_link_t.forEach(pflt => {
+    pflt.addEventListener('click', e => {
+        e.target.innerHTML = 'Link Copied'
+        
+        setTimeout(() => {
+            e.target.innerHTML = 'Share'
+        }, 1000)
+    })
+})
+
+const expand_initiative = document.querySelectorAll('.expand-initiative')
+
+expand_initiative.forEach(item => {
+    item.addEventListener('click', e => {
+        if(e.target.parentElement.classList.contains('collapsed')) {
+            e.target.parentElement.children[1].style.transform = 'translateX(0)'
+        } else {
+            e.target.parentElement.children[1].style.transform = 'translateX(' + (e.target.parentElement.children[1].offsetWidth + 500) + 'px)'
+        }
+
+        (() => {
+            const collapsedEl = document.querySelectorAll('.mission-card.collapsed')
+            collapsedEl.forEach(cEl => {
+                cEl.children[1].style.transform = 'translateX(0)'
+            })
+        })()
+
+        
+        const ifc = document.querySelectorAll('.ifcItem')
+        ifc.forEach(ifcItem => {
+            ifcItem.classList.remove('initiative-first-col')
+        })
+
+        // Initiative Scale Up
+        if (!e.target.parentElement.classList.contains('collapsed')) {
+            e.target.parentElement.parentElement.classList.add('initiative-first-col')
+        }
+
+        if(item.classList.contains('collapsed')) {
+            item.style.height = "250px"
+        } else {
+            item.style.height = "100%"
+        }
+
+        window.addEventListener('click', e => {
+            // console.log(e.target)
+            if(e.target.classList.contains('accordion-item') || e.target.classList.contains('mission-content') || e.target.classList.contains('mission-int-img')) {
+                const imgBox = document.querySelectorAll('.mission-int-img')
+
+                if(item.classList.contains('collapsed')) {
+                    item.style.height = "250px"
+                }
+            }
+        })
+    })
+})
+
+; (function ($) {
+    var page = 2;
+    var allLoaded = false;
+
+    if (allLoaded) {
+        $('#load-more-button').attr("disabled","disabled");
+    }
+
+    function loadPosts() {
+        if (allLoaded) {
+            $('#load-more-button').attr("disabled","disabled");
+            return;
+        }
+
+        $.ajax({
+            url: "https://a2i.gov.bd/wp-admin/admin-ajax.php", // WordPress AJAX URL
+            type: 'post',
+            data: {
+                action: 'trending_insights',
+                page: page
+            },
+            success: function (res) {
+                if (res.trim().length === 0) {
+                    allLoaded = true;
+                    $('#load-more-button').attr("disabled","disabled");
+                } else {
+                    $('.trending-grid').html(res).fadeIn();
+                    page += 1;
+                    // setTimeout(() => {
+                    //     $('.trending-grid').html(res).fadeIn();
+                    //     page += 1;
+                    // }, 1000)
+                }
+            }
+        });
+    }
+    
+    $('#load-more-button').on('click', function() {
+        loadPosts();
+    });
+
+
+    $('.load-publication-by-category').click(function() {
+        var categorySlug = $(this).data('category');
+        loadPostsByCat(categorySlug);
+    });
+
+    function loadPostsByCat(categorySlug) {        
+        $.ajax({
+            url: "https://a2i.gov.bd/wp-admin/admin-ajax.php",
+            type: 'POST',
+            data: {
+                action: 'load_category_pub_post',
+                category_slug: categorySlug
+            },
+            success: function(response) {
+                $('#a2i-publications-grid').html(response);
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    }
+
+    // a2i Publications - Ajax Load More
+    var offset = 9; // Initial offset
+
+    $('#publications-load-more').on('click', function () {
+        offset += 9; // Increase the offset for the next query
+
+        $.ajax({
+            url: "https://a2i.gov.bd/wp-admin/admin-ajax.php",
+            type: 'POST',
+            data: {
+                action: 'pub_posts',
+                offset: offset
+            },
+            success: function(response) {
+                $('#a2i-publications-grid').append(response);
+            }
+        });
+    });
+
+
+
+    $('.load-notices-by-category').click(function() {
+        var categorySlug = $(this).data('notice-category');
+        $(this).addClass('border-dark').siblings().removeClass('border-dark');
+        loadNoticesByCat(categorySlug);
+    });
+
+    function loadNoticesByCat(categorySlug) {        
+        $.ajax({
+            url: "https://a2i.gov.bd/wp-admin/admin-ajax.php",
+            type: 'POST',
+            data: {
+                action: 'load_category_notice_post',
+                notice_cat: categorySlug
+            },
+            success: function(response) {
+                $('#notice-grid').html(response);
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    }
+    
+
+    // Award Section
+    $('#award-boxes .tooltiptext').each(function(i, obj) {
+        if (window.innerWidth >= 1440) {
+            if(i % 6 == 4 || i % 6 == 5) {
+                obj.classList.add('a-right');
+            } else if (i % 6 == 2) {
+                obj.classList.add('a-left');
+            } else {
+                obj.classList.add('a-left');
+            }
+        } else if (window.innerWidth >= 1200 && window.innerWidth < 1440) {
+            if(i % 5 == 3 || i % 5 == 4) {
+                obj.classList.add('a-right');
+            } else if (i % 5 == 2) {
+                obj.classList.add('a-left');
+            } else {
+                obj.classList.add('a-left');
+            }
+        } else if(window.innerWidth < 1200) {
+            if(i % 4 == 2 || i % 4 == 3) {
+                obj.classList.add('a-right');
+            } else if(i % 3 == 1) {
+                obj.classList.add('a-left');
+            } else {
+                obj.classList.add('a-left');
+            }
+        }
+    });
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    setTimeout(function(){
+        $("#loader-wrapper").fadeOut(1000);
+	}, 500);
+    
+    const postBtnIcon = document.querySelectorAll('.stories article .elementor-post__read-more');
+    postBtnIcon.forEach(btnItem => {
+        btnItem.innerHTML = '<img src="https://a2i.gov.bd/wp-content/uploads/2022/08/Arrow.svg" alt="Post read more arrow"/>'
+    })
+    
+    $(document).ready(function () {
+        $('.modal').on('hidden.bs.modal', function (event){
+            let iframes = event.target.getElementsByTagName('iframe');
+            for (let i = 0; i < iframes.length; i++) {
+                let src_tmp = iframes[i].src;
+                iframes[i].src = '';
+                setTimeout(() => {
+                    iframes[i].src = src_tmp;
+                }, 100);
+            }
+        });
+
+        $('#newsletter-industry-focus').slick();
+        
+        $('#international-partners-grid').slick({
+            rows: 3,
+            dots: false,
+            arrows: false,
+            slidesToShow: 8,
+            // slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 100,
+            speed: 5000,
+            // infinite: true,
+            pauseOnHover: false,
+            cssEase: 'linear',
+            responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 6,
+                            infinite: true
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 4,
+                            infinite: true
+                        }
+                    }, 
+                    {
+                        breakpoint: 640,
+                        settings: {
+                            slidesToShow: 2,
+                            dots: false
+                        }
+                    },
+                    {
+                        breakpoint: 300,
+                        settings: "unslick" // destroys slick
+                    }
+                ],
+        });
+        
+        $('#mission-related-articles').slick({
+            dots: false,
+            arrows: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 2,
+            autoplay: true,
+            prevArrow:'#mrp-prev',
+            nextArrow: '#mrp-next',
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                    slidesToShow: 3,
+                    infinite: true
+                }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                    slidesToShow: 2,
+                    infinite: true
+                }
+                }, 
+                {
+                    breakpoint: 640,
+                    settings: {
+                    slidesToShow: 1,
+                    dots: false
+                }
+                },
+                {
+                    breakpoint: 300,
+                    settings: "unslick" // destroys slick
+                }
+            ],
+        });
+
+        // Publication Filter
+        $('.filter-btn').click(function () {
+            const data_attr = $(this).attr('data-filter');
+            if (data_attr == 'all') {
+                $('.pub-box').show('1000')
+            } else {
+                $('.pub-box').not('.'+data_attr).hide('1000');
+                $('.pub-box').filter('.'+data_attr).show('1000');
+            }
+        });
+
+        $('.filter-btn').click(function () {
+            $(this).addClass('filter-active').siblings().removeClass('filter-active');
+        });
+
+        // Team Sub Cat Filter
+        $('.sub-cat-btn').click(function () {
+            const data_attr = $(this).attr('data-filter');
+
+            if (data_attr == 'all') {
+                $('.pub-box').show('1000')
+            } else {
+                $('.pub-box').not('.'+data_attr).hide('1000');
+                $('.pub-box').filter('.'+data_attr).show('1000');
+            }
+        });
+
+        $('.sub-cat-btn').click(function () {
+            $(this).addClass('filter-active').siblings().removeClass('filter-active');
+        });
+    });
+
+    // Team Filter
+    const teamFilterBtn = document.querySelectorAll('.team-filter-btn');
+    const teamItem = document.querySelectorAll('.pub-box');
+
+    teamFilterBtn.forEach((item) => {
+        item.addEventListener('click', () => {
+            const subCatBtn = document.querySelectorAll('.sub-cat-btn')
+
+            subCatBtn.forEach(scb => {
+                scb.classList.remove('filter-active')
+            })
+
+            teamItem.forEach(team => {
+                team.style.display = 'block'
+            });
+        })
+        
+        item.addEventListener('click', (e) => {
+            const activeTabPan = document.querySelector('.tab-pane.active')
+
+            if(activeTabPan.children[0].children[0].classList.contains('sub-cat-btn')) {
+                localStorage.setItem('active-tab', activeTabPan.children[0].children[0].getAttribute('data-filter'))
+                activeTabPan.children[0].children[0].classList.add('filter-active')
+            }
+
+            const getAttr = localStorage.getItem('active-tab')
+
+            if(getAttr) {
+                $('.pub-box').not('.'+getAttr).hide('1000');
+                $('.pub-box').filter('.'+getAttr).show('1000');
+            } else {
+                $('.pub-box').show('1000')
+            }
+        })
+    })
+
+    const activeTabPan = document.querySelector('.tab-pane.active')
+
+    if(activeTabPan.children[0].children[0].classList.contains('sub-cat-btn')) {
+        localStorage.setItem('active-tab', activeTabPan.children[0].children[0].getAttribute('data-filter'))
+        activeTabPan.children[0].children[0].classList.add('filter-active')
+    }
+
+    const getAttr = localStorage.getItem('active-tab')
+
+    if(getAttr) {
+        $('.pub-box').not('.'+getAttr).hide('1000');
+        $('.pub-box').filter('.'+getAttr).show('1000');
+    } else {
+        $('.pub-box').show('1000')
+    }
+}(jQuery));
+
+myModal.show()
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    var elems = document.body.querySelectorAll("body *");
+
+    for(const props in elems) {
+        elems[props].classList.add('accessibility-plugin-ac')
+    }
+});
